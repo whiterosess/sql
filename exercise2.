@@ -1,6 +1,22 @@
--- after WHERE character_name = "Ken the Ninja", add code to get a result of a maximum of 10 rows
+SELECT name AS "player name", height AS "height"
+FROM players
+WHERE height > (
+  SELECT AVG(height)
+  FROM players
+)
+;
 
 SELECT *
-FROM purchases
-WHERE character_name = "Ken the Ninja"
-LIMIT 10;
+FROM players
+JOIN countries
+ON players.country_id = countries.id
+WHERE countries.name = "Japan"
+AND height >= 180
+;
+
+SELECT countries.name AS "country name", AVG(goals) AS "average score" 
+FROM players
+JOIN countries
+ON players.country_id = countries.id
+GROUP BY countries.name
+;
