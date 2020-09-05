@@ -1,5 +1,5 @@
--- after "FROM purchases" add code to get rows that have "10" or more in the "price" column
+-- after "FROM purchases" add code to get rows where the "name" contains "pudding"
 
 SELECT *
 FROM purchases
-WHERE price >= 10;
+WHERE name LIKE "%pudding%";
