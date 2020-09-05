@@ -1,6 +1,5 @@
--- after "FROM purchases" add code to get rows
--- where the "price" column is NULL
+-- after "FROM purchases" add code to put rows in descending order by the "price" column
 
 SELECT *
 FROM purchases
-WHERE price is NULL
+ORDER BY price DESC;
