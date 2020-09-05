@@ -1,5 +1,6 @@
--- after "FROM purchases" add code to rows with a date of "2018-11-01" or earlier in the "purchased_at" column
+-- after "FROM purchases" add code to get rows
+-- where the "price" column is not NULL
 
 SELECT *
 FROM purchases
-WHERE purchased_at <= "2018-11-01";
+WHERE price is not NULL
