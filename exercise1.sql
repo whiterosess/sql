@@ -1,2 +1,3 @@
-SELECT name
-FROM purchases;
+SELECT *
+FROM purchases
+WHERE price = 10;
