@@ -1,22 +1,30 @@
-SELECT name AS "player name", height AS "height"
-FROM players
-WHERE height > (
-  SELECT AVG(height)
-  FROM players
-)
-;
+-- get the specified data for men's, women's, and gender neutral products
+-- get the specified data for men's, women's, and gender neutral products
+SELECT items.gender, SUM(items.price) AS "sales total"
+FROM sales_records
+JOIN items
+ON sales_records.item_id = items.id
+GROUP BY items.gender;
 
-SELECT *
-FROM players
-JOIN countries
-ON players.country_id = countries.id
-WHERE countries.name = "Japan"
-AND height >= 180
-;
+-- get the specified data for the top 5 products with the highest sales
+SELECT items.id, items.name, items.price * COUNT(*) AS "sales total"
+FROM sales_records
+JOIN items
+ON sales_records.item_id = items.id
+GROUP BY items.id, items.name, items.price
+ORDER BY COUNT(*) * items.price DESC
+LIMIT 5;
 
-SELECT countries.name AS "country name", AVG(goals) AS "average score" 
-FROM players
-JOIN countries
-ON players.country_id = countries.id
-GROUP BY countries.name
-;
+-- get all rows with a higher sales total than the item "grey hoodie"
+SELECT items.id, items.name, items.price * COUNT(*) AS "sales total"
+FROM sales_records
+JOIN items
+ON sales_records.item_id = items.id
+GROUP BY items.id, items.name, items.price
+HAVING (COUNT(*) * items.price) > (
+  SELECT COUNT(*) * items.price
+  FROM sales_records
+  JOIN items
+  ON sales_records.item_id = items.id
+  WHERE items.name = "grey hoodie"
+);
